@@ -1,5 +1,6 @@
+import { Prisma } from "../../../../generated/prisma/client";
 import { prisma } from "../../shared/prisma";
-import { University } from "./university.interface";
+import { Filters, Pagination, University } from "./university.interface";
 
 const createUniversity = async (universityInfo: University) => {
   const result = await prisma.university.create({
@@ -9,24 +10,6 @@ const createUniversity = async (universityInfo: University) => {
 };
 
 
-
-type Filters = {
-  country?:any ;
-  location?: any ;
-  minFee?: any;
-  maxFee?: any;
-  minRank?: any;
-  maxRank?: any;
-  minYear?: any;
-  maxYear?: any;
-};
-
-
-type Pagination = {
-  page: number;
-  limit: number;
-};
-
 const getAllUniversities = async (
   filters: Filters,
   pagination: Pagination
@@ -34,7 +17,7 @@ const getAllUniversities = async (
   const { page, limit } = pagination;
   const skip = (page - 1) * limit;
 
-  const whereConditions: any = {
+  const whereConditions: Prisma.UniversityWhereInput = {
     country: filters.country ? String(filters.country) : undefined,
     location: filters.location ? String(filters.location) : undefined,
     tuitionFee: {

@@ -9,3 +9,20 @@ export interface University {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type Filters = {
+  country?:string;
+  location?: string ;
+  minFee?: number;
+  maxFee?: number;
+  minRank?: number;
+  maxRank?: number;
+  minYear?: number;
+  maxYear?: number;
+};
+
+
+export type Pagination = {
+  page: number;
+  limit: number;
+};

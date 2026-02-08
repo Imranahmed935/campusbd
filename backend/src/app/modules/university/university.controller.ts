@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import catchAsync from "../../shared/catchAsync";
 import sendResponse from "../../shared/sendResponse";
 import { universityService } from "./university.service";
+import { Filters} from "./university.interface";
 
 const createUniversity = catchAsync(async (req: Request, res: Response) => {
   const universityInfo = req.body;
@@ -14,15 +15,6 @@ const createUniversity = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-// const getAllUniversities = catchAsync(async (req: Request, res: Response) => {
-//   const result = await universityService.getAllUniversities();
-//   sendResponse(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: "All Universities Retrieved Successfully!!",
-//     data: result,
-//   });
-// });
 
 const getAllUniversities = catchAsync(async (req: Request, res: Response) => {
   const {
@@ -54,7 +46,7 @@ const getAllUniversities = catchAsync(async (req: Request, res: Response) => {
     limit: Number(limit),
   };
 
-  const result = await universityService.getAllUniversities(filters, pagination);
+  const result = await universityService.getAllUniversities(filters as Filters, pagination);
 
   sendResponse(res, {
     statusCode: 200,
